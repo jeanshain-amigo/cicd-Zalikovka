@@ -1,14 +1,14 @@
+version: '3.8'
+
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py test
     volumes:
       - .:/app
       - ./staticfiles:/app/staticfiles
-    ports:
-      - "8000:8000"
-    env_file:
-      - ./.env
+    environment:
+      - DATABASE_URL=postgres://education_user:your_secure_password@db:5432/education_db
     depends_on:
       - db
     networks:
