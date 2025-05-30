@@ -51,3 +51,10 @@ class EducationAppTests(TestCase):
         )
         # Create an exam for course (discipline1)
         self.exam = Exam.objects.create(course=self.course, date=timezone.now(), type='credit')
+# Log in the user
+        self.client.login(username='lecturer1', password='testpass123')
+
+    def test_lecturer_grades_view_access(self):
+        response = self.client.get(reverse('education:lecturer_grades'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'education/lecturer_grades.html')
