@@ -20,8 +20,23 @@ jobs:
       - name: Build Docker images
         run: docker compose build
 
+      - name: Debug environment variables
+        run: echo "SECRET_KEY=${SECRET_KEY}" && echo "DEBUG=${DEBUG}" && echo "ALLOWED_HOSTS=${ALLOWED_HOSTS}"
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }}
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+
       - name: Run tests
-        run: docker compose run web
+        run: |
+          docker compose run --env SECRET_KEY=${SECRET_KEY} \
+                             --env DEBUG=${DEBUG} \
+                             --env ALLOWED_HOSTS=${ALLOWED_HOSTS} \
+                             web
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }}
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
 
       - name: Stop and remove containers
         if: always()
