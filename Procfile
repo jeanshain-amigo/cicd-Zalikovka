@@ -1,1 +1,1 @@
-web: gunicorn ZalikDjango.wsgi:application
+web: gunicorn ZalikDjango2.wsgi:application

@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ZalikDjango.wsgi.application'
+WSGI_APPLICATION = 'ZalikDjango2.wsgi.application'
 
 # Database
 DATABASES = {
