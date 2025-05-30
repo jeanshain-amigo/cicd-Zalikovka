@@ -1,0 +1,80 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main">
+    <div class="profile-elements">
+        <div class="head-subhead">
+            <div class="heading">
+                <span class="heading-span">Профіль викладача</span>
+            </div>
+            <div class="subheading" style="width: auto;">
+                <p>Виставляйте та переглядайте</p>
+                <p>оцінки онлайн!</p>
+            </div>
+        </div>
+        <div class="profile-data">
+            <nav class="profile-nav">
+                <button class="profile-button" style="background-color: #FFAD9F;">
+                    <div style="display: flex; gap: 25px;">
+                        <img src="{% static 'images/index/info.svg' %}" alt="">
+                        <span class="profile-text" style="font-weight: 700;">Мої дані</span>
+                    </div>
+                </button>
+                <button class="profile-button">
+                    <div style="display: flex; gap: 25px;">
+                        <img src="{% static 'images/index/grade.svg' %}" alt="">
+                        <span class="profile-text" style="font-weight: 700;"><a href="{% url 'education:lecturer_grades' %}" style="text-decoration: none; color: inherit;">Оцінки</a></span>
+                    </div>
+                </button>
+            </nav>
+            <div class="profile-info" style="width: 950px;">
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-elements">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <img src="{% static 'images/index/deco.svg' %}" alt="">
+                                    <h1>Персональні дані</h1>
+                                </div>
+                                <img src="{% static 'images/index/deco2.svg' %}" alt="" style="height: 34px;">
+                            </div>
+                            <hr class="hr" style="margin: 0; background-color: black;">
+                            <div class="card-desc">
+                                <p class="profile-text"><b>ПІБ:</b> {{ teacher.full_name }}</p>
+                                <p class="profile-text"><b>Факультет:</b> {{ teacher.faculty.name }}</p>
+                                <p class="profile-text"><b>Email:</b> {{ teacher.email }}</p>
+                                <p class="profile-text"><b>Ступінь:</b> {{ teacher.degree }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-elements">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <img src="{% static 'images/index/deco.svg' %}" alt="">
+                                    <h1>Навчальні дані</h1>
+                                </div>
+                                <img src="{% static 'images/index/deco2.svg' %}" alt="" style="height: 34px;">
+                            </div>
+                            <hr class="hr" style="margin: 0; background-color: black;">
+                            <div class="card-desc">
+                                <p class="profile-text">Дисципліни, що викладаються:</p>
+                                <br>
+                                {% for course in courses %}
+                                    <p class="profile-text">- {{ course.discipline.name }}</p>
+                                {% empty %}
+                                    <p class="profile-text">Немає дисциплін для відображення.</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: end;">
+                        <a href="{% url 'education:logout' %}" class="login_button" style="color: #000;">Вийти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

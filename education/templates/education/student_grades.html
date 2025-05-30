@@ -1,0 +1,188 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main">
+    <div class="profile-elements">
+        <div class="head-subhead">
+            <div class="heading">
+                <span class="heading-span">Оцінки студента</span>
+            </div>
+            <div class="subheading" style="width: auto;">
+                <p>Переглядай будь-які</p>
+                <p>свої оцінки онлайн!</p>
+            </div>
+        </div>
+        <div class="profile-data">
+            <nav class="profile-nav">
+                <button class="profile-button">
+                    <div style="display: flex; gap: 25px;">
+                        <img src="{% static 'images/index/info.svg' %}" alt="">
+                        <span class="profile-text" style="font-weight: 700;"><a href="{% url 'education:student_profile' %}" style="text-decoration: none; color: inherit;">Мої дані</a></span>
+                    </div>
+                </button>
+                <button class="profile-button" style="background-color: #FFAD9F;">
+                    <div style="display: flex; gap: 25px;">
+                        <img src="{% static 'images/index/grade.svg' %}" alt="">
+                        <span class="profile-text" style="font-weight: 700;">Оцінки</span>
+                    </div>
+                </button>
+                <div class="grade-filter">
+                    <div class="filter-elements">
+                        <form method="GET" action="{% url 'education:student_grades' %}">
+                            <!-- Grade Filter -->
+                            <div class="filter-elements">
+                                <span class="filter-header">Бал:</span>
+                                <div class="number-filter">
+                                    <div class="filter-input">
+                                        <input type="number" name="grade_min" id="grade-number" min="60" max="100" value="{{ grade_min|default:60 }}">
+                                        <input type="number" name="grade_max" id="grade-number" min="60" max="100" value="{{ grade_max|default:100 }}">
+                                        <button type="submit" class="cta_button" style="height: 50px; width: 25%; font-weight: 600;">Ок</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="hr" style="margin: 5%; background-color: #CED3DC;">
+                            <!-- Course Year Filter -->
+                            <div class="filter-elements">
+                                <span class="filter-header">Курс:</span>
+                                <div class="number-filter">
+                                    <div class="filter-input">
+                                        <input type="number" name="course_min" id="course-number" min="1" max="6" value="{{ course_min|default:1 }}">
+                                        <input type="number" name="course_max" id="course-number" min="1" max="6" value="{{ course_max|default:6 }}">
+                                        <button type="submit" class="cta_button" style="height: 50px; width: 25%; font-weight: 600;">Ок</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="hr" style="margin: 5%; background-color: #CED3DC;">
+                            <!-- Semester Filter -->
+                            <div class="filter-elements">
+                                <span class="filter-header">Семестр:</span>
+                                <div class="filter-option">
+                                    <input type="checkbox" name="semester_1" id="semester_1" {% if semester_1 %}checked{% endif %}>
+                                    <p style="margin: 0;">Перший</p>
+                                </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" name="semester_2" id="semester_2" {% if semester_2 %}checked{% endif %}>
+                                    <p style="margin: 0;">Другий</p>
+                                </div>
+                            </div>
+                            <hr class="hr" style="margin: 5%; background-color: #CED3DC;">
+                            <!-- Discipline Type Filter -->
+                            <div class="filter-elements">
+                                <span class="filter-header">Тип предмету:</span>
+                                <div class="filter-option">
+                                    <input type="checkbox" name="type_exam" id="type_exam" {% if type_exam %}checked{% endif %}>
+                                    <p style="margin: 0;">Іспит</p>
+                                </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" name="type_credit" id="type_credit" {% if type_credit %}checked{% endif %}>
+                                    <p style="margin: 0;">Залік</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <div class="profile-info" style="width: 950px; display: flex; flex-direction: column; gap: 40px;">
+                <div class="sorting-area">
+                    <img src="{% static 'images/index/sort.svg' %}" alt="" style="width: 20px;">
+                    <p style="margin: 0; font-size: 24px; color: #7B7B7B">Сортування:</p>
+                    <form method="GET" action="{% url 'education:student_grades' %}">
+                        <select name="sort_type" id="sort-type" onchange="this.form.submit()">
+                            <option value="seq" {% if sort_type == 'seq' %}selected{% endif %}>За хронологією</option>
+                            <option value="asc" {% if sort_type == 'asc' %}selected{% endif %}>За зростанням</option>
+                            <option value="desc" {% if sort_type == 'desc' %}selected{% endif %}>За спаданням</option>
+                        </select>
+                        <!-- Preserve filter values in the sorting form -->
+                        <input type="hidden" name="grade_min" value="{{ grade_min|default:60 }}">
+                        <input type="hidden" name="grade_max" value="{{ grade_max|default:100 }}">
+                        <input type="hidden" name="course_min" value="{{ course_min|default:1 }}">
+                        <input type="hidden" name="course_max" value="{{ course_max|default:6 }}">
+                        <input type="hidden" name="semester_1" value="{{ semester_1|yesno:'on,' }}">
+                        <input type="hidden" name="semester_2" value="{{ semester_2|yesno:'on,' }}">
+                        <input type="hidden" name="type_exam" value="{{ type_exam|yesno:'on,' }}">
+                        <input type="hidden" name="type_credit" value="{{ type_credit|yesno:'on,' }}">
+                    </form>
+                </div>
+                <div class="table">
+                    <table style="width: 100%; margin-top: 20px;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center; padding: 10px; border-bottom: 1px solid black;">Дисципліна</th>
+                                <th style="text-align: center; padding: 10px; border-bottom: 1px solid black;">Кредити</th>
+                                <th style="text-align: center; padding: 10px; border-bottom: 1px solid black;">Години</th>
+                                <th style="text-align: center; padding: 10px; border-bottom: 1px solid black;">Оцінка</th>
+                                <th style="text-align: center; padding: 10px; border-bottom: 1px solid black;">Бали</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for academic_year, semester_groups in grouped_grades %}
+                                {% for semester, type_groups in semester_groups %}
+                                    <tr>
+                                        <td colspan="5" style="text-align: center; padding: 10px; font-weight: bold; background-color: #f0f0f0;">
+                                            {{ semester }} семестр {{ academic_year }}
+                                        </td>
+                                    </tr>
+                                    {% for exam_type, grades in type_groups %}
+                                        <tr>
+                                            <td colspan="5" style="text-align: center; padding: 10px; font-style: italic;">
+                                                {% if exam_type == 'exam' %}Іспити{% else %}Заліки{% endif %}
+                                            </td>
+                                        </tr>
+                                        {% for grade in grades %}
+                                            <tr>
+                                                <td style="padding: 10px; text-align: left;">{{ grade.exam.course.discipline.name|default:"-" }}</td>
+                                                <td style="padding: 10px; text-align: center;">{{ grade.exam.course.discipline.credits|default:"-" }}</td>
+                                                <td style="padding: 10px; text-align: center;">{{ grade.exam.course.discipline.hours|default:"-" }}</td>
+                                                <td style="padding: 10px; text-align: center;">
+                                                    {% if grade.exam.type == "credit" %}
+                                                        Зарахов.
+                                                    {% else %}
+                                                        {% if grade.grade_value >= 90 and grade.grade_value <= 100 %}
+                                                            5
+                                                        {% elif grade.grade_value >= 75 and grade.grade_value <= 89 %}
+                                                            4
+                                                        {% elif grade.grade_value >= 60 and grade.grade_value <= 74 %}
+                                                            3
+                                                        {% else %}
+                                                            {{ grade.grade_value|floatformat:2 }}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </td>
+                                                <td style="padding: 10px; text-align: center;">
+                                                    {{ grade.grade_value|floatformat:2 }}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% endfor %}
+                            {% empty %}
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 10px;">Немає оцінок для відображення.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <p style="margin: 0; font-size: 24px;">Середній бал - {{ average_grade }}</p>
+                    <form method="POST" action="{% url 'education:export_grades_pdf' %}">
+                        {% csrf_token %}
+                        <!-- Pass current filter and sort values to PDF export -->
+                        <input type="hidden" name="grade_min" value="{{ grade_min|default:60 }}">
+                        <input type="hidden" name="grade_max" value="{{ grade_max|default:100 }}">
+                        <input type="hidden" name="course_min" value="{{ course_min|default:1 }}">
+                        <input type="hidden" name="course_max" value="{{ course_max|default:6 }}">
+                        <input type="hidden" name="semester_1" value="{{ semester_1|yesno:'on,' }}">
+                        <input type="hidden" name="semester_2" value="{{ semester_2|yesno:'on,' }}">
+                        <input type="hidden" name="type_exam" value="{{ type_exam|yesno:'on,' }}">
+                        <input type="hidden" name="type_credit" value="{{ type_credit|yesno:'on,' }}">
+                        <input type="hidden" name="sort_type" value="{{ sort_type|default:'seq' }}">
+                        <button type="submit" class="login_button" style="font-size: 24px;">Експортувати в PDF</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

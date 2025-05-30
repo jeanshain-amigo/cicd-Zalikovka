@@ -1,0 +1,107 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main">
+    <div class="main-elements">
+        <div class="main-text">
+            <div class="motto">
+                <span class="highlight">єЗаліковка -</span>
+                <span>твої результати</span>
+                <span>на твоєму екрані</span>
+            </div>
+            <div class="description">
+                <p>єЗаліковка - електроний сервіс КНУ, створений для миттєвого доступу до твоєї залікової книжки онлайн. Заходь за своєю корпоративною поштою та хутчіш переглядай свої бали!</p>
+            </div>
+            <button class="cta_button">Переглянути</button>
+        </div>
+        <img src="{% static '/images/index/main-pic.png' %}" alt="Main pic" class="main-pic">
+    </div>
+</div>
+<div class="how-to-use">
+    <div class="how-to-use-elements">
+        <div class="head-subhead">
+            <div class="heading">
+                <span class="heading-span">Як користуватися сервісом?</span>
+            </div>
+            <div class="subheading">
+                <p>Дізнайтеся більше про користування нашим сервісом!</p>
+            </div>
+        </div>
+
+        <div class="toggler">
+            <div class="role-toggle" id="roleToggle">
+                <div class="slider-bg"></div>
+                <div class="role-option student active">Студент</div>
+                <div class="role-option teacher">Викладач</div>
+            </div>
+        </div>
+
+        <div id="student-content" class="role-content">
+            <div class="role-info-blocks">
+                <div class="role-box">
+                    <h1>01</h1>
+                    <p class="heading-span">Авторизуйся у системі</p>
+                </div>
+                <div class="role-box">
+                    <h1>02</h1>
+                    <p class="heading-span">Застосовуй необхідні фільтри для пошуку</p>
+                </div>
+                <div class="role-box">
+                    <h1>03</h1>
+                    <p class="heading-span">Переглядай свої оцінки</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="teacher-content" class="role-content hidden">
+            <div class="role-info-blocks">
+                <div class="role-box">
+                    <h1>01</h1>
+                    <p class="heading-span">Авторизуйтеся у системі</p>
+                </div>
+                <div class="role-box">
+                    <h1>02</h1>
+                    <p class="heading-span">Обирайте бажаний предмет та курс</p>
+                </div>
+                <div class="role-box">
+                    <h1>03</h1>
+                    <p class="heading-span">Виставляйте та переглядайте оцінки</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    const toggle = document.getElementById("roleToggle");
+    const slider = toggle.querySelector(".slider-bg");
+    const studentBtn = toggle.querySelector(".student");
+    const teacherBtn = toggle.querySelector(".teacher");
+
+    const studentContent = document.getElementById("student-content");
+    const teacherContent = document.getElementById("teacher-content");
+
+    toggle.addEventListener("click", () => {
+        const isStudentActive = studentBtn.classList.contains("active");
+
+        if (isStudentActive) {
+            studentBtn.classList.remove("active");
+            teacherBtn.classList.add("active");
+            slider.style.left = "134px";
+
+            studentContent.classList.add("hidden");
+            teacherContent.classList.remove("hidden");
+        } else {
+            teacherBtn.classList.remove("active");
+            studentBtn.classList.add("active");
+            slider.style.left = "0";
+
+            teacherContent.classList.add("hidden");
+            studentContent.classList.remove("hidden");
+        }
+    });
+</script>
+{% endblock %}

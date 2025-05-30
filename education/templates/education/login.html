@@ -1,0 +1,29 @@
+{% extends 'education/base.html' %}
+
+{% block content %}
+    <div class="modal-content" style="gap: 15%; margin: 5% auto;">
+        <h1 class="login-modal-title">Увійти до сервісу</h1>
+        <div class="login-form">
+            <form method="post" action="{% url 'education:login' %}">
+                {% csrf_token %}
+                <div class="form-el">
+                    <label for="username">Нікнейм:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-el">
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <input type="hidden" name="next" value="{% url 'education:home' %}" />
+                <div class="modal-buttons">
+                    <button class="cta_button" type="submit">Увійти</button>
+                </div>
+            </form>
+            <div class="remember" style="justify-content: space-between;">
+                <p>Не маєте акаунту? <a href="{% url 'education:register' %}" style="color: #A31621;">Зареєструватися</a>.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

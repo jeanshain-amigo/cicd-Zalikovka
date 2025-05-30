@@ -1,0 +1,190 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main">
+    <div class="profile-elements">
+        <div class="head-subhead">
+            <div class="heading">
+                <span class="heading-span">Профіль викладача</span>
+            </div>
+            <div class="subheading" style="width: auto;">
+                <p>Виставляйте та переглядайте</p>
+                <p>оцінки онлайн!</p>
+            </div>
+        </div>
+        <div class="profile-data">
+            <nav class="profile-nav">
+                <button class="profile-button" style="width: 100%">
+                    <div style="display: flex; gap: 25px;">
+                        <img src="{% static 'images/index/info.svg' %}" alt="">
+                        <span class="profile-text" style="font-weight: 700;"><a href="{% url 'education:lecturer_profile' %}" style="text-decoration: none; color: inherit;">Мої дані</a></span>
+                    </div>
+                </button>
+                <button class="profile-button" style="background-color: #FFAD9F; width: 100%">
+                    <div style="display: flex; gap: 25px;">
+                        <img src="{% static 'images/index/grade.svg' %}" alt="">
+                        <span class="profile-text" style="font-weight: 700;">Оцінки</span>
+                    </div>
+                </button>
+            </nav>
+            <div class="profile-info" style="width: 950px;">
+                <div class="cards" style="gap: 40px;">
+                    <div class="card">
+                        <div class="disc-choice" style="display: flex; gap: 40px; align-items: flex-end;">
+                            <form method="GET" action="{% url 'education:lecturer_grades' %}" style="display: flex; gap: 40px; align-items: flex-end;">
+                                <div class="choice" style="display: grid; gap: 10px;">
+                                    <p style="margin: 0; padding-left: 15px;">Дисципліна</p>
+                                    <select name="discipline" id="discipline" onchange="this.form.submit()" style="width: 450px; white-space: normal; text-overflow: ellipsis;">
+                                        <option value="">Виберіть дисципліну</option>
+                                        {% for course in lecturer_courses %}
+                                            <option value="{{ course.discipline.id }}" {% if course.discipline.id|stringformat:"s" == request.GET.discipline %}selected{% endif %}>
+                                                {{ course.discipline.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="choice" style="display: grid; gap: 10px;">
+                                    <p style="margin: 0; padding-left: 15px;">Група</p>
+                                    <select name="group" id="group" onchange="this.form.submit()" style="width: 150px;">
+                                        <option value="">Виберіть групу</option>
+                                        {% for group in groups %}
+                                            <option value="{{ group.id }}" {% if group.id|stringformat:"s" == request.GET.group %}selected{% endif %}>
+                                                {{ group.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <button type="submit" class="cta_button">Вибрати</button>
+                            </form>
+                        </div>
+                    </div>
+                    {% if students %}
+                        <form method="POST" action="{% url 'education:save_grades' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="discipline" value="{{ request.GET.discipline }}">
+                            <input type="hidden" name="group" value="{{ request.GET.group }}">
+                            <div class="grade-table">
+                                <table id="gradesTable">
+                                    <tr>
+                                        <td colspan="6" style="text-align: center;">
+                                            Екзаменаційна відомість з дисципліни "{% if selected_discipline %}{{ selected_discipline.discipline.name }}{% else %}Невідома дисципліна{% endif %}"
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center; width: 5%;">№</th>
+                                        <th>Прізвище, ім'я, по батькові</th>
+                                        <th>Сума балів ЗМ</th>
+                                        <th>Бали отримані під час іспиту</th>
+                                        <th>100-бальна шкала</th>
+                                        <th>Національна шкала</th>
+                                    </tr>
+                                    {% for student in students %}
+                                        <tr>
+                                            <td style="width: 5%;">{{ forloop.counter }}</td>
+                                            <td>{{ student.full_name }}</td>
+                                            <td>
+                                                <input type="number" name="semester_grade_{{ student.id }}" value="{{ student.semester_grade|default:0 }}" min="0" max="100" style="width: 80px;" oninput="updateGrades(this, {{ student.id }}, '{{ student.exam_type }}')">
+                                            </td>
+                                            <td>
+                                                <input type="number" name="exam_grade_{{ student.id }}" value="{{ student.exam_grade|default:0 }}" min="0" max="100" style="width: 80px;" oninput="updateGrades(this, {{ student.id }}, '{{ student.exam_type }}')">
+                                            </td>
+                                            <td class="total-grade" data-student-id="{{ student.id }}">{{ student.total_grade|default:0 }}</td>
+                                            <td class="national-grade" data-student-id="{{ student.id }}">{{ student.national_grade|default:"-" }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                            <div class="table-control" style="display: flex; justify-content: flex-end; gap: 40px; margin-top: 3%">
+                                <button id="closeBtn" class="login_button" type="button">Закрити</button>
+                                <button type="submit" class="cta_button">Завершити</button>
+                            </div>
+                        </form>
+                    {% else %}
+                        <p style="text-align: center; font-size: 18px;">Оберіть дисципліну та групу для відображення студентів.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="closeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">Підтвердження</div>
+            <p>Ви впевнені, що хочете закрити відомість?</p>
+            <p>Дані не будуть збережені.</p>
+            <div class="modal-buttons">
+                <button id="cancelClose" class="login_button">Скасувати</button>
+                <button id="confirmClose" class="cta_button">Закрити</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById('closeModal');
+    const closeBtn = document.getElementById('closeBtn');
+    const cancelBtn = document.getElementById('cancelClose');
+    const confirmBtn = document.getElementById('confirmClose');
+    const disciplineSelect = document.getElementById('discipline');
+    const groupSelect = document.getElementById('group');
+    const form = disciplineSelect.closest('form');
+
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'block';
+    });
+
+    cancelBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        disciplineSelect.value = '';
+        groupSelect.value = '';
+        form.submit();
+    });
+
+    confirmBtn.addEventListener('click', function() {
+        alert('Відомість закрито!');
+        modal.style.display = 'none';
+        disciplineSelect.value = '';
+        groupSelect.value = '';
+        form.submit();
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    function updateGrades(input, studentId, examType) {
+        const row = input.closest('tr');
+        const semesterInput = row.querySelector(`input[name="semester_grade_${studentId}"]`);
+        const examInput = row.querySelector(`input[name="exam_grade_${studentId}"]`);
+        const totalCell = row.querySelector(`.total-grade[data-student-id="${studentId}"]`);
+        const nationalCell = row.querySelector(`.national-grade[data-student-id="${studentId}"]`);
+
+        const semesterGrade = parseFloat(semesterInput.value) || 0;
+        const examGrade = parseFloat(examInput.value) || 0;
+        const totalGrade = Math.min(100, semesterGrade + examGrade);
+
+        totalCell.textContent = totalGrade;
+
+        let nationalGrade = "-";
+        if (totalGrade < 60) {
+            nationalGrade = "-";
+        } else {
+            if (examType === 'credit') {
+                nationalGrade = "Зарахов.";
+            } else if (examType === 'exam') {
+                if (totalGrade >= 90 && totalGrade <= 100) {
+                    nationalGrade = "5";
+                } else if (totalGrade >= 75 && totalGrade <= 89) {
+                    nationalGrade = "4";
+                } else if (totalGrade >= 60 && totalGrade <= 74) {
+                    nationalGrade = "3";
+                }
+            }
+        }
+        nationalCell.textContent = nationalGrade;
+    }
+</script>
+{% endblock %}
