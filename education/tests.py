@@ -83,3 +83,13 @@ def test_save_grades(self):
         self.assertEqual(response.status_code, 302)
         grade = Grade.objects.get(student=self.student, exam__course=self.course)
         self.assertEqual(float(grade.grade_value), 70.0)
+
+def test_grade_model_validation(self):
+        grade = Grade(
+            student=self.student,
+            exam=self.exam,
+            teacher=self.lecturer,
+            grade_value=50  # Below minimum
+        )
+        with self.assertRaises(ValidationError):
+            grade.full_clean()
