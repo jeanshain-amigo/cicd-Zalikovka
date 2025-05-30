@@ -72,3 +72,14 @@ def test_lecturer_grades_display_students(self):
         })
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.student.full_name)
+
+def test_save_grades(self):
+        response = self.client.post(reverse('education:save_grades'), {
+            'discipline': self.discipline1.id,
+            'group': self.group.id,
+            f'semester_grade_{self.student.id}': '40',
+            f'exam_grade_{self.student.id}': '30',
+        })
+        self.assertEqual(response.status_code, 302)
+        grade = Grade.objects.get(student=self.student, exam__course=self.course)
+        self.assertEqual(float(grade.grade_value), 70.0)
