@@ -64,3 +64,11 @@ def test_lecturer_grades_view_unauthenticated(self):
         response = self.client.get(reverse('education:lecturer_grades'))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, f"{reverse('education:login')}?next={reverse('education:lecturer_grades')}")
+
+def test_lecturer_grades_display_students(self):
+        response = self.client.get(reverse('education:lecturer_grades'), {
+            'discipline': self.discipline1.id,
+            'group': self.group.id
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.student.full_name)
