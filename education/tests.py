@@ -58,3 +58,9 @@ class EducationAppTests(TestCase):
         response = self.client.get(reverse('education:lecturer_grades'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'education/lecturer_grades.html')
+
+def test_lecturer_grades_view_unauthenticated(self):
+        self.client.logout()
+        response = self.client.get(reverse('education:lecturer_grades'))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, f"{reverse('education:login')}?next={reverse('education:lecturer_grades')}")
