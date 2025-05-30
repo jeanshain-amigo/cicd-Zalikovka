@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ZalikDjango.urls'
+ROOT_URLCONF = 'ZalikDjango2.urls'
 
 TEMPLATES = [
     {
