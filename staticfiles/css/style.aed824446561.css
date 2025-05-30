@@ -1,0 +1,675 @@
+body {
+    margin: 0;
+    width: 100%;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    margin-top: 60px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 100px;
+}
+
+.prime_link {
+    font-family: "Ubuntu", sans-serif;
+    text-decoration: none;
+    color: #000;
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.login_button {
+    padding: 20px 25px;
+    fill: none;
+    border: 1px solid black;
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 14px;
+    background: white;
+}
+
+.main {
+    margin-top: 60px;
+}
+
+.main-elements {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 100px;
+}
+
+.main-text {
+    display: grid;
+    gap: 5%;
+}
+
+.main-pic {
+    width: 580px;
+    height: 456px;
+}
+
+.motto span {
+    display: block;
+    font-size: 60px;
+    font-weight: 500;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.motto .highlight {
+    font-weight: 700;
+}
+
+.description {
+    width: 500px;
+    text-align: justify;
+}
+
+.cta_button {
+    width: 200px;
+    height: 68px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 14px;
+    background: #A31621;
+    color: white;
+}
+
+.how-to-use {
+    margin-top: 60px;
+}
+
+.how-to-use-elements {
+    margin: 0px 100px;
+}
+
+.heading {
+    width: fit-content;
+    padding: 0px 7px;
+    text-align: center;
+    border-radius: 7px;
+    background-color: #FFAD9F;
+}
+
+.head-subhead {
+    display: flex;
+    gap: 60px;
+}
+
+.heading-span {
+    font-size: 40px;
+    font-weight: 700;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.subheading {
+    width: 327px;
+}
+
+    .subheading p {
+        font-size: 18px;
+        margin: 0;
+    }
+
+.toggler {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.role-toggle {
+    position: relative;
+    width: 268px;
+    height: 68px;
+    background-color: #f3f3f3;
+    border-radius: 14px;
+    display: flex;
+    align-self: center;
+    overflow: hidden;
+    cursor: pointer;
+    font-family: "Open Sans", sans-serif;
+    user-select: none;
+    border: 1px solid black;
+}
+
+.slider-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #FFAD9F;
+    border: 1px solid black;
+    border-radius: 14px;
+    transition: left 0.4s ease;
+    z-index: 1;
+}
+
+.role-option {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    font-size: 20px;
+    font-weight: 400;
+    transition: font-weight 0.3s ease;
+    color: #000;
+}
+
+    .role-option.active {
+        font-weight: 700;
+    }
+
+.hidden {
+    display: none;
+}
+
+.role-info-blocks {
+    margin-top: 60px;
+    display: grid;
+    gap: 30px;
+}
+
+.role-box {
+    height: 100px;
+    width: auto;
+    background-color: #F3F3F3;
+    border: 1px solid black;
+    border-radius: 45px;
+    position: relative;
+    box-shadow: 0 5px 0 0 black;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding-left: 60px;
+}
+
+.footer {
+    margin-top: 60px;
+}
+
+.footer-elements {
+    background-color: #A31621;
+    margin: 0px 100px;
+    border-radius: 45px 45px 0 0;
+    padding: 55px 60px 50px 60px;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-nav-links {
+    display: flex;
+    gap: 40px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-nav .prime_link {
+    color: white;
+    font-size: 24px;
+}
+
+.contact {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer .heading {
+    width: 190px;
+    height: 27px;
+}
+
+.footer .heading-span {
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.contact-info {
+    display: grid;
+    gap: 27px;
+}
+
+.contacts-data {
+    width: 268px;
+    height: 140px;
+    display: grid;
+    gap: 20px;
+}
+
+.contact-element {
+    color: white;
+    font-size: 18px;
+    justify-self: stretch;
+    margin: 0;
+}
+
+.subscribe {
+    display: grid;
+    place-items: center;
+    width: 718px;
+    height: 194px;
+    border-radius: 14px;
+    background-color: #FFAD9F;
+}
+
+.subscribe-elements {
+    display: flex;
+    gap: 20px;
+    justify-self: center;
+    align-items: center;
+}
+
+.subscribe input {
+    width: 285px;
+    height: 69px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 14px;
+    padding-left: 35px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.subscribe .cta_button {
+    width: 333px;
+    height: 68px;
+}
+
+.hr {
+    border: none;
+    height: 1px;
+    background-color: white;
+    margin: 40px 0;
+}
+
+.arr-text {
+    display: flex;
+    gap: 40px;
+}
+
+.privacy-elements {
+    margin: 0px 100px;
+    display: grid;
+    gap: 60px;
+}
+
+.privacy-desc p {
+    margin: 0;
+    text-align: justify;
+    font-size: 24px;
+}
+
+.card {
+    border: 1px solid black;
+    box-shadow: 0 5px 0 0 black;
+    border-radius: 45px;
+    padding: 40px 35px;
+}
+
+    .card p {
+        margin: 0;
+        text-align: justify;
+    }
+
+.card-elements {
+    display: grid;
+    gap: 28px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-title {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+    .card-title h1 {
+        margin: 0;
+    }
+
+.cards {
+    display: grid;
+    gap: 60px;
+}
+
+.profile-elements {
+    margin: 0px 100px;
+    display: grid;
+    gap: 80px;
+}
+
+.profile-data {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-nav {
+    display: grid;
+    gap: 40px;
+    align-content: baseline;
+}
+
+.profile-button {
+    padding: 12px 34px;
+    border: 1px solid black;
+    border-radius: 14px;
+    background-color: white;
+}
+
+.profile-text {
+    font-family: "Open Sans";
+    font-size: 32px;
+}
+
+.grade-filter {
+    padding: 28px 14px;
+    border: 1px solid black;
+    border-radius: 14px;
+}
+
+.filter-option {
+    display: flex;
+    gap: 10px;
+}
+
+    .filter-option input {
+        width: 22px;
+        height: 22px;
+        accent-color: #A31621;
+    }
+
+.filter-elements {
+    display: grid;
+    gap: 17px;
+}
+
+.filter-option {
+    gap: 17px;
+}
+
+.filter-header {
+    font-family: 'Open Sans';
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.filter-input input {
+    width: 25%;
+    height: 50px;
+    border: 1px solid #CED3DC;
+    border-radius: 14px;
+    padding-left: 15px;
+    font-family: 'Open Sans';
+    font-size: 18px;
+}
+
+.filter-toggle input {
+    accent-color: #A31621;
+    width: 95%;
+}
+
+.filter-toggle {
+    display: flex;
+    justify-content: center;
+}
+
+.number-filter {
+    display: grid;
+    gap: 17px;
+}
+
+.filter-input {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sorting-area {
+    padding: 17px 25px;
+    background-color: #FFAD9F;
+    border-radius: 14px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+    .sorting-area select {
+        border-radius: 4px;
+        font-family: 'Open Sans';
+        font-size: 24px;
+        padding: 0px 5px;
+        background-color: rgba(255,255,255,0);
+        border: none;
+    }
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid black;
+    border-radius: 25px;
+    overflow: hidden;
+    width: 100%;
+    table-layout: fixed;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f9f9f9;
+}
+
+    /* Ширина колонок */
+    th:nth-child(1), td:nth-child(1) {
+        width: 45%;
+        text-align: left;
+        word-wrap: break-word;
+        white-space: normal;
+    }
+
+    th:nth-child(2), td:nth-child(2),
+    th:nth-child(3), td:nth-child(3),
+    th:nth-child(4), td:nth-child(4),
+    th:nth-child(5), td:nth-child(5) {
+        width: 13.75%;
+    }
+
+/* Округлення зовнішніх кутів */
+table tr:first-child th:first-child {
+    border-top-left-radius: 25px;
+}
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 25px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 25px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 25px;
+}
+
+.disc-choice select {
+    border-radius: 14px;
+    font-family: 'Open Sans';
+    font-size: 24px;
+    padding: 0px 5px;
+    border: 1px solid black;
+    height: 68px;
+}
+
+.grade-table table {
+    table-layout: auto;
+}
+
+.grade-table th:nth-child(2), td:nth-child(2),
+th:nth-child(3), td:nth-child(3),
+th:nth-child(4), td:nth-child(4),
+th:nth-child(5), td:nth-child(5) {
+    width: auto;
+}
+
+.grade-table th:nth-child(1), td:nth-child(1) {
+    text-align: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.login-modal-title {
+    font-family: 'Ubuntu';
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.form-el p {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    text-align: start;
+    padding-left: 5%;
+}
+
+.form-el input {
+    width: 90%;
+    height: 40px;
+    padding-left: 3%;
+    border-radius: 14px;
+    border: 1px solid black;
+    font-family: 'Open Sans';
+}
+
+.login-form {
+    display: grid;
+    gap: 5%;
+}
+
+.remember {
+    display: flex;
+    padding-left: 4%;
+    gap: 2%;
+}
+
+    .remember input {
+        border: 1px solid black;
+        border-radius: 10px;
+        accent-color: #A31621;
+    }
+
+.admin-control-el {
+    display: flex;
+    gap: 150px;
+    align-items: center;
+}
+.form-control {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.btn-primary {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.text-danger {
+    color: red;
+    font-size: 0.875rem;
+}
+
+.role-box h1, p {
+    margin: 0;
+}
+
+.role-selection {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+    .role-selection input {
+        border: 1px solid black;
+        border-radius: 10px;
+        accent-color: #A31621;
+    }
+
+    .role-selection p {
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+    }
