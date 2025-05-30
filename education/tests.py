@@ -113,3 +113,28 @@ def test_exam_type_based_on_semester(self):
         self.assertEqual(response.status_code, 200)
         student = response.context['students'][0]
         self.assertEqual(student.exam_type, 'exam')
+    
+def test_full_grade_submission_flow(self):
+        response = self.client.get(reverse('education:lecturer_grades'), {
+            'discipline': self.discipline1.id,
+            'group': self.group.id
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.student.full_name)
+
+        response = self.client.post(reverse('education:save_grades'), {
+            'discipline': self.discipline1.id,
+            'group': self.group.id,
+            f'semester_grade_{self.student.id}': '50',
+            f'exam_grade_{self.student.id}': '40',
+        })
+        self.assertEqual(response.status_code, 302)
+
+        grade = Grade.objects.get(student=self.student, exam__course=self.course)
+        self.assertEqual(float(grade.grade_value), 90.0)
+
+        response = self.client.get(reverse('education:lecturer_grades'), {
+            'discipline': self.discipline1.id,
+            'group': self.group.id
+        })
+        self.assertContains(response, '90')  # Check total grade instead
