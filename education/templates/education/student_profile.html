@@ -1,0 +1,80 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main">
+    <div class="profile-elements">
+        <div class="head-subhead">
+            <div class="heading">
+                <span class="heading-span">Профіль студента</span>
+            </div>
+            <div class="subheading" style="width: auto;">
+                <p>Переглядай будь-які</p>
+                <p>свої оцінки онлайн!</p>
+            </div>
+        </div>
+        <div class="profile-data">
+            <nav class="profile-nav">
+                <button class="profile-button" style="background-color: #FFAD9F;">
+                    <div style="display: flex; gap: 25px;">
+                        <img src="{% static 'images/index/info.svg' %}" alt="">
+                        <span class="profile-text" style="font-weight: 700;">Мої дані</span>
+                    </div>
+                </button>
+                <button class="profile-button">
+                    <div style="display: flex; gap: 25px;">
+                        <img src="{% static 'images/index/grade.svg' %}" alt="">
+                        <span class="profile-text" style="font-weight: 700;"><a href="{% url 'education:student_grades' %}" style="text-decoration: none; color: inherit;">Оцінки</a></span>
+                    </div>
+                </button>
+            </nav>
+            <div class="profile-info" style="width: 950px;">
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-elements">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <img src="{% static 'images/index/deco.svg' %}" alt="">
+                                    <h1>Персональні дані</h1>
+                                </div>
+                                <img src="{% static 'images/index/deco2.svg' %}" alt="" style="height: 34px;">
+                            </div>
+                            <hr class="hr" style="margin: 0; background-color: black;">
+                            <div class="card-desc">
+                                <p class="profile-text"><b>ПІБ:</b> {{ student.full_name }}</p>
+                                <p class="profile-text"><b>Факультет:</b> {{ student.faculty.name }}</p>
+                                <p class="profile-text"><b>Курс:</b> {{ study_year }} курс</p>
+                                <p class="profile-text"><b>Група:</b> {{ student.group.name }}</p>
+                                <p class="profile-text"><b>Електрона пошта:</b> {{ student.user.email }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-elements">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <img src="{% static 'images/index/deco.svg' %}" alt="">
+                                    <h1>Навчальні дані</h1>
+                                </div>
+                                <img src="{% static 'images/index/deco2.svg' %}" alt="" style="height: 34px;">
+                            </div>
+                            <hr class="hr" style="margin: 0; background-color: black;">
+                            <div class="card-desc">
+                                <p class="profile-text">Складено предметів (всього): {{ total_disciplines }},
+                                <br> з них іспитів: {{ exams }}, заліків: {{ credits }}.</p>
+                                <br>
+                                <p class="profile-text">Середній бал за період навчання: {{ average_grade }}</p>
+                                <p class="profile-text">Найвищий бал: {{ highest_grade_exam.grade_value|default:"N/A" }} ({{ highest_grade_exam.exam.course.discipline|default:"N/A" }})</p>
+                                <p class="profile-text">Найнижчий бал: {{ lowest_grade_exam.grade_value|default:"N/A" }} ({{ lowest_grade_exam.exam.course.discipline|default:"N/A" }})</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: end;">
+                        <a href="{% url 'education:logout' %}" class="login_button" style="color: #000;">Вийти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

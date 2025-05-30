@@ -1,0 +1,22 @@
+{% load static %}
+
+<header class="header">
+    <nav class="navigation">
+        <a href="{% url 'education:home' %}" class="prime_link">єЗаліковка</a>
+        {% if user.is_authenticated %}
+            {% if user.teacher %}
+                <a href="{% url 'education:lecturer_profile' %}" class="login_button" id="profile-button" style="color: black">
+                    <img src="{% static 'images/index/profile.svg' %}" alt="Profile">
+                    Профіль
+                </a>
+            {% else %}
+                <a href="{% url 'education:student_profile' %}" class="login_button" id="profile-button" style="color: black">
+                    <img src="{% static 'images/index/profile.svg' %}" alt="Profile">
+                    Профіль
+                </a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'education:login' %}" class="login_button" id="login-button" style="color: black">Увійти</a>
+        {% endif %}
+    </nav>
+</header>

@@ -1,0 +1,162 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main">
+    <div class="privacy-elements">
+        <div class="head-subhead">
+            <div class="heading">
+                <span class="heading-span">Політика конфіденційності</span>
+            </div>
+            <div class="subheading" style="width: auto;">
+                <p>Дізнайтеся про правила користування</p>
+                <p>нашим сервісом!</p>
+            </div>
+        </div>
+        <div class="privacy-desc">
+            <p>Політика конфіденційності сервісу <b>"єЗаліковка"</b></p>
+            <p>Останнє оновлення: <b>01.02.2025</b></p>
+            <p>Ця Політика конфіденційності визначає порядок збору, використання, зберігання та захисту персональних даних користувачів сервісу "єЗаліковка" (далі – "Сервіс"), розробленого для студентів та викладачів Київського національного університету імені Тараса Шевченка. Сервіс використовується студентами для перегляду власних балів та викладачами для виставлення оцінок.</p>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <div class="card-elements">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <img src="{% static '/images/index/deco.svg' %}" alt="">
+                            <h1>Яку інформацію ми збираємо?</h1>
+                        </div>
+                        <img src="{% static '/images/index/deco2.svg' %}" alt="" style="height: 34px;">
+                    </div>
+                    <hr class="hr" style="margin: 0; background-color: black;">
+                    <div class="card-desc">
+                        <p>При використанні Сервісу ми можемо збирати такі категорії даних:</p>
+                        <ul style="margin: 0;">
+                            <li>Особисті дані: ім'я, прізвище, по батькові, номер студентського квитка (для студентів), <br>посада (для викладачів), електронна пошта, телефонний номер.</li>
+                            <li>Академічні дані: оцінки, результати заліків та іспитів, навчальний курс, група, факультет.</li>
+                            <li>Технічні дані: IP-адреса, інформація про пристрій, файли cookies.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-elements">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <img src="{% static '/images/index/deco.svg' %}" alt="">
+                            <h1>Як ми використовуємо вашу інформацію?</h1>
+                        </div>
+                        <img src="{% static '/images/index/deco2.svg' %}" alt="" style="height: 34px;">
+                    </div>
+                    <hr class="hr" style="margin: 0; background-color: black;">
+                    <div class="card-desc">
+                        <p>Зібрані дані використовуються для таких цілей:</p>
+                        <ul style="margin: 0;">
+                            <li>Надання доступу до Сервісу та його функціоналу.</li>
+                            <li>Відображення актуальних академічних результатів студента.</li>
+                            <li>Надання викладачам можливості виставляти оцінки та переглядати досягнення студентів.</li>
+                            <li>Покращення роботи Сервісу та персоналізація користувацького досвіду.</li>
+                            <li>Надсилання важливих сповіщень щодо змін у навчальному процесі.</li>
+                            <li>Захист від шахрайства та несанкціонованого доступу.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-elements">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <img src="{% static '/images/index/deco.svg' %}" alt="">
+                            <h1>Захист даних</h1>
+                        </div>
+                        <img src="{% static '/images/index/deco2.svg' %}" alt="" style="height: 34px;">
+                    </div>
+                    <hr class="hr" style="margin: 0; background-color: black;">
+                    <div class="card-desc">
+                        <p>Ми використовуємо сучасні технології для забезпечення безпеки ваших даних, зокрема:</p>
+                        <ul style="margin: 0;">
+                            <li>Шифрування з'єднання (SSL/TLS) під час передавання даних.</li>
+                            <li>Захист баз даних від несанкціонованого доступу.</li>
+                            <li>Регулярне оновлення системи безпеки.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-elements">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <img src="{% static '/images/index/deco.svg' %}" alt="">
+                            <h1>Чи передаємо ми ваші дані третім особам?</h1>
+                        </div>
+                        <img src="{% static '/images/index/deco2.svg' %}" alt="" style="height: 34px;">
+                    </div>
+                    <hr class="hr" style="margin: 0; background-color: black;">
+                    <div class="card-desc">
+                        <p>Ваші персональні дані не передаються стороннім особам, за винятком таких випадків:</p>
+                        <ul style="margin: 0;">
+                            <li>Якщо це необхідно для надання послуг, пов’язаних з навчальним процесом.</li>
+                            <li>Якщо цього вимагає законодавство України.</li>
+                            <li>За вашою особистою згодою.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-elements">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <img src="{% static '/images/index/deco.svg' %}" alt="">
+                            <h1>Зберігання даних</h1>
+                        </div>
+                        <img src="{% static '/images/index/deco2.svg' %}" alt="" style="height: 34px;">
+                    </div>
+                    <hr class="hr" style="margin: 0; background-color: black;">
+                    <div class="card-desc">
+                        <p>Ми зберігаємо персональні дані протягом часу, необхідного для виконання навчальних завдань, або поки користувач не подасть запит на їх видалення.</p>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-elements">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <img src="{% static '/images/index/deco.svg' %}" alt="">
+                            <h1>Ваші права</h1>
+                        </div>
+                        <img src="{% static '/images/index/deco2.svg' %}" alt="" style="height: 34px;">
+                    </div>
+                    <hr class="hr" style="margin: 0; background-color: black;">
+                    <div class="card-desc">
+                        <p>Користувачі Сервісу мають такі права:</p>
+                        <ul style="margin: 0;">
+                            <li>Отримати доступ до своїх персональних даних.</li>
+                            <li>Вимагати виправлення або видалення своїх даних.</li>
+                            <li>Відкликати згоду на обробку персональних даних.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-elements">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <img src="{% static '/images/index/deco.svg' %}" alt="">
+                            <h1>Файли Cookies</h1>
+                        </div>
+                        <img src="{% static '/images/index/deco2.svg' %}" alt="" style="height: 34px;">
+                    </div>
+                    <hr class="hr" style="margin: 0; background-color: black;">
+                    <div class="card-desc">
+                        <p>Сервіс використовує cookies для покращення роботи. Ви можете керувати налаштуваннями cookies у своєму браузері.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="privacy-desc">
+            <p>Ми залишаємо за собою право вносити зміни до цієї Політики. Усі зміни будуть опубліковані у Сервісі, <br> і ми рекомендуємо періодично переглядати цей документ.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

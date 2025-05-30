@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>єЗаліковка</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include 'shared/header.html' %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    {% include 'shared/footer.html' %}
+</body>
+</html>

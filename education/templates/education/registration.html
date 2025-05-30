@@ -1,0 +1,97 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="modal-content" style="gap: 15%; margin: 5% auto; width: 400px; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h1 class="login-modal-title">Зареєструватися</h1>
+        <div class="login-form">
+            <form method="post" action="{% url 'education:register' %}">
+                {% csrf_token %}
+                <div class="form-el">
+                    <label for="username">Нікнейм:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-el">
+                    <label for="email">Електронна пошта:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-el">
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-el">
+                    <label for="full_name">Повне ім'я:</label>
+                    <input type="text" id="full_name" name="full_name" required>
+                </div>
+                <div class="form-el">
+                    <label>Роль:</label>
+                    <div style="display: flex; justify-content: center">
+                        <div>
+                            <input type="radio" id="role-student" name="role" value="Student" required>
+                            <label for="role-student">Студент</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="role-teacher" name="role" value="Teacher">
+                            <label for="role-teacher">Викладач</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-el">
+                    <label for="faculty_id">Факультет:</label>
+                    <select id="faculty_id" name="faculty_id" required>
+                        <option value="" disabled selected>Виберіть факультет</option>
+                        {% for faculty in faculties %}
+                            <option value="{{ faculty.id }}">{{ faculty.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div id="group-select" class="form-el" style="display: none;">
+                    <label for="group_id">Група:</label>
+                    <select id="group_id" name="group_id" required>
+                        <option value="" disabled selected>Виберіть групу</option>
+                    </select>
+                </div>
+                <div id="degree-select" class="form-el" style="display: none;">
+                    <label for="degree">Ступінь:</label>
+                    <input type="text" id="degree" name="degree">
+                </div>
+                <div class="modal-buttons">
+                    <button class="cta_button" type="submit">Зареєструватися</button>
+                </div>
+                <div class="remember" style="justify-content: center; margin-top: 10px;">
+                    <p>Вже маєте акаунт? <a href="{% url 'education:login' %}" style="color: #A31621;">Увійти</a>.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('input[name="role"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const groupSelect = document.getElementById('group-select');
+                const degreeSelect = document.getElementById('degree-select');
+                groupSelect.style.display = this.value === 'Student' ? 'block' : 'none';
+                degreeSelect.style.display = this.value === 'Teacher' ? 'block' : 'none';
+            });
+        });
+
+        document.getElementById('faculty_id').addEventListener('change', function() {
+            const facultyId = this.value;
+            const groupSelect = document.getElementById('group_id');
+            if (facultyId) {
+                fetch(`/groups/?faculty_id=${facultyId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        groupSelect.innerHTML = '<option value="" disabled selected>Виберіть групу</option>';
+                        data.forEach(group => {
+                            const option = document.createElement('option');
+                            option.value = group.id;
+                            option.textContent = group.name;
+                            groupSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching groups:', error));
+            }
+        });
+    </script>
+{% endblock %}

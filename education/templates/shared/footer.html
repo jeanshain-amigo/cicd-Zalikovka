@@ -1,0 +1,48 @@
+{% load static %}
+
+<footer class="footer">
+    <div class="footer-elements">
+        <div class="nav-and-contacts">
+            <nav class="footer-nav">
+                <a href="{% url 'education:home' %}" class="prime_link">єЗаліковка</a>
+                <div class="footer-nav-links">
+                    <a href="https://fit.knu.ua/" style="font-size: 18px; color: white; margin: 0;">Про нас</a>
+                    <a href="https://fit.knu.ua/" style="font-size: 18px; color: white; margin: 0;">Розробники</a>
+                    <a href="https://www.facebook.com/fit.knu.ua" style="font-size: 18px; color: white; margin: 0;">Новини</a>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/school/taras-shevchenko-national-university-of-kyiv"><img src="{% static '/images/index/linkedin.svg' %}" alt="Linkedin"></a>
+                    <a href="https://www.facebook.com/kyiv.university"><img src="{% static '/images/index/facebook.svg' %}" alt="Facebook"></a>
+                    <a href="https://x.com/KyivUniversity"><img src="{% static '/images/index/twitter.svg' %}" alt="Twitter"></a>
+                </div>
+            </nav>
+            <div class="contact">
+                <div class="contact-info">
+                    <div class="heading">
+                        <span class="heading-span">Зв’яжіться з нами:</span>
+                    </div>
+                    <div class="contacts-data">
+                        <p class="contact-element">Електрона пошта: info@knu.ua</p>
+                        <p class="contact-element">Телефон: +380 44 239-33-33</p>
+                        <p class="contact-element">Адреса: 01033, місто Київ, вул. Володимирська, 60</p>
+                    </div>
+                </div>
+                <div class="subscribe">
+                    <div class="subscribe-elements">
+                        <form action="#">
+                            <input type="email" placeholder="Email">
+                            <button type="submit" class="cta_button">Підпишіться на оновлення</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="arr">
+            <hr class="hr">
+            <div class="arr-text">
+                <p style="font-size: 18px; color: white; margin: 0;">© 2025 єЗаліковка. Усі права захищено.</p>
+                <a href="{% url 'education:privacy' %}" style="font-size: 18px; color: white; margin: 0;">Політика конфіденційності</a>
+            </div>
+        </div>
+    </div>
+</footer>
