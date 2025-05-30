@@ -138,3 +138,18 @@ def test_full_grade_submission_flow(self):
             'group': self.group.id
         })
         self.assertContains(response, '90')  # Check total grade instead
+
+def test_reset_dropdowns_on_cancel(self):
+        response = self.client.get(reverse('education:lecturer_grades'), {
+            'discipline': self.discipline1.id,
+            'group': self.group.id
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.student.full_name)
+
+        response = self.client.get(reverse('education:lecturer_grades'), {
+            'discipline': '',
+            'group': ''
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Оберіть дисципліну та групу для відображення студентів.')
