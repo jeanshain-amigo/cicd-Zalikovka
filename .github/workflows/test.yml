@@ -1,28 +1,33 @@
 name: CI - Build and Test
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+     on:
+       push:
+         branches: [ main ]
+       pull_request:
+         branches: [ main ]
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+     jobs:
+       test:
+         runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+         steps:
+           - name: Checkout code
+             uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+           - name: Set up Docker Buildx
+             uses: docker/setup-buildx-action@v3
 
-      - name: Build Docker images
-        run: docker compose build
+           - name: Build Docker images
+             run: docker compose build
 
-      - name: Run tests
-        run: docker compose run web
+           - name: Run tests
+             run: docker compose run web
+             env:
+               DATABASE_URL: ${{ secrets.DATABASE_URL }}
+               SECRET_KEY: ${{ secrets.SECRET_KEY }}
+               DEBUG: ${{ secrets.DEBUG }}
+               ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
 
-      - name: Stop and remove containers
-        if: always()
-        run: docker compose down
+           - name: Stop and remove containers
+             if: always()
+             run: docker compose down
