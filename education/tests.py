@@ -93,3 +93,23 @@ def test_grade_model_validation(self):
         )
         with self.assertRaises(ValidationError):
             grade.full_clean()
+            
+def test_exam_type_based_on_semester(self):
+        # First request with discipline1 (should use self.exam with type='credit')
+        response = self.client.get(reverse('education:lecturer_grades'), {
+            'discipline': self.discipline1.id,  # Explicitly use discipline1
+            'group': self.group.id
+        })
+        self.assertEqual(response.status_code, 200)
+        student = response.context['students'][0]
+        self.assertEqual(student.exam_type, 'credit')
+
+        # Second request with discipline2 (should use exam2 with type='exam')
+        exam2 = Exam.objects.create(course=self.course2, date=timezone.now(), type='exam')
+        response = self.client.get(reverse('education:lecturer_grades'), {
+            'discipline': self.discipline2.id,  # Switch to discipline2
+            'group': self.group.id
+        })
+        self.assertEqual(response.status_code, 200)
+        student = response.context['students'][0]
+        self.assertEqual(student.exam_type, 'exam')
